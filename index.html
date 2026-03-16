@@ -17,7 +17,24 @@ background: linear-gradient(to bottom, #2a0050, #0a0015, #000000);
 cursor:none;
 }
 
-/* cursor roxo */
+/* imagens laterais */
+
+.side-img{
+position:fixed;
+width:160px;
+opacity:0.85;
+z-index:1;
+pointer-events:none;
+}
+
+.left1{ left:20px; top:80px; }
+.left2{ left:40px; bottom:120px; }
+
+.right1{ right:20px; top:120px; }
+.right2{ right:40px; bottom:160px; }
+.right3{ right:120px; bottom:60px; }
+
+/* cursor */
 
 .cursor{
 position:fixed;
@@ -31,7 +48,7 @@ box-shadow:0 0 10px #9b4dff;
 transform:translate(-50%,-50%);
 }
 
-/* efeito clique */
+/* clique */
 
 .click-effect{
 position:fixed;
@@ -45,14 +62,8 @@ z-index:998;
 }
 
 @keyframes clickAnim{
-from{
-transform:translate(-50%,-50%) scale(0.5);
-opacity:1;
-}
-to{
-transform:translate(-50%,-50%) scale(6);
-opacity:0;
-}
+from{transform:translate(-50%,-50%) scale(0.5);opacity:1;}
+to{transform:translate(-50%,-50%) scale(6);opacity:0;}
 }
 
 /* estrelas */
@@ -106,7 +117,7 @@ background:white;
 color:black;
 }
 
-/* botão menu */
+/* menu */
 
 .menu-btn{
 position:fixed;
@@ -117,7 +128,7 @@ cursor:pointer;
 z-index:5;
 }
 
-/* aba jogos */
+/* jogos */
 
 .games-panel{
 position:fixed;
@@ -190,6 +201,15 @@ color:black;
 
 <div class="cursor" id="cursor"></div>
 
+<!-- imagens decorativas -->
+
+<img class="side-img left1" src="IMAGEM1.jpg">
+<img class="side-img left2" src="IMAGEM2.jpg">
+
+<img class="side-img right1" src="IMAGEM3.jpg">
+<img class="side-img right2" src="IMAGEM4.jpg">
+<img class="side-img right3" src="IMAGEM5.jpg">
+
 <div id="stars"></div>
 
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
@@ -236,31 +256,29 @@ color:black;
 const cursor = document.getElementById("cursor");
 
 document.addEventListener("mousemove",(e)=>{
-cursor.style.left = e.clientX + "px";
-cursor.style.top = e.clientY + "px";
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
 });
 
-/* efeito clique */
+/* clique */
 
 document.addEventListener("click",(e)=>{
 
-let bubble = document.createElement("div");
-bubble.className = "click-effect";
+let bubble=document.createElement("div");
+bubble.className="click-effect";
 
-bubble.style.left = e.clientX + "px";
-bubble.style.top = e.clientY + "px";
+bubble.style.left=e.clientX+"px";
+bubble.style.top=e.clientY+"px";
 
 document.body.appendChild(bubble);
 
-setTimeout(()=>{
-bubble.remove();
-},600);
+setTimeout(()=>bubble.remove(),600);
 
 });
 
-/* música */
+/* musica */
 
-const music = document.getElementById("music");
+const music=document.getElementById("music");
 
 document.addEventListener("click",()=>{
 music.volume=0.5;
@@ -268,11 +286,11 @@ music.play();
 },{once:true});
 
 function toggleMusic(){
-music.muted = !music.muted;
+music.muted=!music.muted;
 }
 
 function changeVolume(v){
-music.volume = v;
+music.volume=v;
 }
 
 /* discord */
@@ -286,7 +304,7 @@ alert("Discord copiado: henrique799m");
 
 function copyNick(nick){
 
-if(nick === ""){
+if(nick===""){
 alert("Nick não definido ainda");
 return;
 }
@@ -304,15 +322,15 @@ document.getElementById("gamesPanel").classList.toggle("open");
 
 /* estrelas */
 
-const starsContainer = document.getElementById("stars");
-const stars = [];
+const starsContainer=document.getElementById("stars");
+const stars=[];
 
 for(let i=0;i<1200;i++){
 
-let star = document.createElement("div");
+let star=document.createElement("div");
 star.className="star";
 
-let size = Math.random()*2+0.5;
+let size=Math.random()*2+0.5;
 
 star.style.width=size+"px";
 star.style.height=size+"px";
@@ -338,14 +356,14 @@ function animateStars(){
 
 for(let star of stars){
 
-star.y -= star.speed;
+star.y-=star.speed;
 
-if(star.y < -10){
-star.y = window.innerHeight + 10;
-star.x = Math.random()*window.innerWidth;
+if(star.y<-10){
+star.y=window.innerHeight+10;
+star.x=Math.random()*window.innerWidth;
 }
 
-star.element.style.top = star.y+"px";
+star.element.style.top=star.y+"px";
 
 }
 
