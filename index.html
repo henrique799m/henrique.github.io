@@ -67,6 +67,50 @@ background:white;
 color:black;
 }
 
+/* botão menu */
+
+.menu-btn{
+position:fixed;
+top:20px;
+right:20px;
+font-size:22px;
+cursor:pointer;
+z-index:5;
+}
+
+/* aba lateral */
+
+.games-panel{
+position:fixed;
+top:0;
+right:-260px;
+width:260px;
+height:100%;
+background:rgba(0,0,0,0.9);
+padding-top:80px;
+transition:0.4s;
+z-index:4;
+}
+
+.games-panel.open{
+right:0;
+}
+
+/* jogos */
+
+.game{
+width:180px;
+margin:20px auto;
+padding:15px;
+border:1px solid white;
+border-radius:8px;
+}
+
+.game:hover{
+background:white;
+color:black;
+}
+
 /* player */
 
 .player{
@@ -102,6 +146,22 @@ color:black;
 
 <div id="stars"></div>
 
+<!-- BOTÃO MENU -->
+
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+<!-- ABA JOGOS -->
+
+<div id="gamesPanel" class="games-panel">
+
+<div class="game">Valorant</div>
+
+<div class="game">Fortnite</div>
+
+<div class="game">Minecraft</div>
+
+</div>
+
 <div class="card">
 
 <img src="https://i.pinimg.com/736x/94/4c/5f/944c5ff43c2bf7c5065c99038e5ccf79.jpg">
@@ -129,7 +189,7 @@ color:black;
 
 <script>
 
-/* iniciar música ao clicar na tela */
+/* iniciar música */
 
 const music = document.getElementById("music");
 
@@ -153,6 +213,12 @@ music.muted = !music.muted;
 
 function changeVolume(value){
 music.volume = value;
+}
+
+/* menu jogos */
+
+function toggleMenu(){
+document.getElementById("gamesPanel").classList.toggle("open");
 }
 
 /* estrelas */
