@@ -119,11 +119,8 @@ color:black;
 <!-- PLAYER -->
 
 <div class="player">
-
 <button onclick="toggleMusic()">Mute</button>
-
-<input type="range" min="0" max="1" step="0.01" value="0.5" onchange="changeVolume(this.value)">
-
+<input type="range" min="0" max="1" step="0.01" value="0.5" oninput="changeVolume(this.value)">
 </div>
 
 <audio id="music" loop>
@@ -131,12 +128,15 @@ color:black;
 </audio>
 
 <script>
-document.addEventListener("click", function(){
-document.getElementById("music").play();
-},{ once:true });
-</script>
 
-<script>
+/* iniciar música ao clicar na tela */
+
+const music = document.getElementById("music");
+
+document.addEventListener("click", () => {
+music.volume = 0.5;
+music.play();
+},{once:true});
 
 /* copiar discord */
 
@@ -147,16 +147,8 @@ alert("Discord copiado: henrique799m");
 
 /* player */
 
-const music = document.getElementById("music");
-
 function toggleMusic(){
-
-if(music.muted){
-music.muted=false;
-}else{
-music.muted=true;
-}
-
+music.muted = !music.muted;
 }
 
 function changeVolume(value){
@@ -217,5 +209,6 @@ requestAnimationFrame(animateStars);
 animateStars();
 
 </script>
+
 </body>
 </html>
