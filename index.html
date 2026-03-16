@@ -59,6 +59,7 @@ text-decoration:none;
 width:200px;
 margin-left:auto;
 margin-right:auto;
+cursor:pointer;
 }
 
 .link:hover{
@@ -82,11 +83,20 @@ color:black;
 <p>Minha bio</p>
 
 <a class="link" href="https://instagram.com/henriqu_md" target="_blank">Instagram</a>
-<a class="link" href="https://discord.com/users/1433597878185627704" target="_blank">Discord</a>
+
+<a class="link" onclick="copyDiscord()">Copiar Discord</a>
 
 </div>
 
 <script>
+
+function copyDiscord(){
+
+navigator.clipboard.writeText("henrique799m");
+
+alert("Discord copiado: henrique799m");
+
+}
 
 const starsContainer = document.getElementById("stars");
 const stars = [];
