@@ -87,13 +87,21 @@ right:-260px;
 width:260px;
 height:100%;
 background:rgba(0,0,0,0.9);
-padding-top:80px;
+padding-top:60px;
 transition:0.4s;
 z-index:4;
 }
 
 .games-panel.open{
 right:0;
+}
+
+/* titulo */
+
+.games-title{
+text-align:center;
+font-size:18px;
+margin-bottom:20px;
 }
 
 /* jogos */
@@ -104,6 +112,7 @@ margin:20px auto;
 padding:15px;
 border:1px solid white;
 border-radius:8px;
+cursor:pointer;
 }
 
 .game:hover{
@@ -154,11 +163,13 @@ color:black;
 
 <div id="gamesPanel" class="games-panel">
 
-<div class="game">Valorant</div>
+<div class="games-title">Jogos atualmente</div>
 
-<div class="game">Fortnite</div>
+<div class="game" onclick="copyNick('henras#diaxx')">Valorant</div>
 
-<div class="game">Minecraft</div>
+<div class="game" onclick="copyNick('henrsix7')">Fortnite</div>
+
+<div class="game" onclick="copyNick('')">Minecraft</div>
 
 </div>
 
@@ -203,6 +214,20 @@ music.play();
 function copyDiscord(){
 navigator.clipboard.writeText("henrique799m");
 alert("Discord copiado: henrique799m");
+}
+
+/* copiar nick jogos */
+
+function copyNick(nick){
+
+if(nick === ""){
+alert("Nick não definido ainda");
+return;
+}
+
+navigator.clipboard.writeText(nick);
+alert("Nick copiado: " + nick);
+
 }
 
 /* player */
