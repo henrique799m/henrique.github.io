@@ -14,6 +14,45 @@ font-family:Arial;
 text-align:center;
 overflow:hidden;
 background: linear-gradient(to bottom, #2a0050, #0a0015, #000000);
+cursor:none;
+}
+
+/* cursor roxo */
+
+.cursor{
+position:fixed;
+width:12px;
+height:12px;
+background:#9b4dff;
+border-radius:50%;
+pointer-events:none;
+z-index:999;
+box-shadow:0 0 10px #9b4dff;
+transform:translate(-50%,-50%);
+}
+
+/* efeito clique */
+
+.click-effect{
+position:fixed;
+width:10px;
+height:10px;
+border:2px solid #9b4dff;
+border-radius:50%;
+pointer-events:none;
+animation:clickAnim 0.6s ease-out;
+z-index:998;
+}
+
+@keyframes clickAnim{
+from{
+transform:translate(-50%,-50%) scale(0.5);
+opacity:1;
+}
+to{
+transform:translate(-50%,-50%) scale(6);
+opacity:0;
+}
 }
 
 /* estrelas */
@@ -78,7 +117,7 @@ cursor:pointer;
 z-index:5;
 }
 
-/* aba lateral */
+/* aba jogos */
 
 .games-panel{
 position:fixed;
@@ -96,15 +135,11 @@ z-index:4;
 right:0;
 }
 
-/* titulo */
-
 .games-title{
 text-align:center;
 font-size:18px;
 margin-bottom:20px;
 }
-
-/* jogos */
 
 .game{
 width:180px;
@@ -153,13 +188,11 @@ color:black;
 
 <body>
 
+<div class="cursor" id="cursor"></div>
+
 <div id="stars"></div>
 
-<!-- BOTÃO MENU -->
-
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
-
-<!-- ABA JOGOS -->
 
 <div id="gamesPanel" class="games-panel">
 
@@ -187,8 +220,6 @@ color:black;
 
 </div>
 
-<!-- PLAYER -->
-
 <div class="player">
 <button onclick="toggleMusic()">Mute</button>
 <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="changeVolume(this.value)">
@@ -200,23 +231,58 @@ color:black;
 
 <script>
 
-/* iniciar música */
+/* cursor */
+
+const cursor = document.getElementById("cursor");
+
+document.addEventListener("mousemove",(e)=>{
+cursor.style.left = e.clientX + "px";
+cursor.style.top = e.clientY + "px";
+});
+
+/* efeito clique */
+
+document.addEventListener("click",(e)=>{
+
+let bubble = document.createElement("div");
+bubble.className = "click-effect";
+
+bubble.style.left = e.clientX + "px";
+bubble.style.top = e.clientY + "px";
+
+document.body.appendChild(bubble);
+
+setTimeout(()=>{
+bubble.remove();
+},600);
+
+});
+
+/* música */
 
 const music = document.getElementById("music");
 
-document.addEventListener("click", () => {
-music.volume = 0.5;
+document.addEventListener("click",()=>{
+music.volume=0.5;
 music.play();
 },{once:true});
 
-/* copiar discord */
+function toggleMusic(){
+music.muted = !music.muted;
+}
+
+function changeVolume(v){
+music.volume = v;
+}
+
+/* discord */
 
 function copyDiscord(){
 navigator.clipboard.writeText("henrique799m");
 alert("Discord copiado: henrique799m");
 }
 
-/* copiar nick jogos */
+/* jogos */
 
 function copyNick(nick){
 
@@ -226,21 +292,11 @@ return;
 }
 
 navigator.clipboard.writeText(nick);
-alert("Nick copiado: " + nick);
+alert("Nick copiado: "+nick);
 
 }
 
-/* player */
-
-function toggleMusic(){
-music.muted = !music.muted;
-}
-
-function changeVolume(value){
-music.volume = value;
-}
-
-/* menu jogos */
+/* menu */
 
 function toggleMenu(){
 document.getElementById("gamesPanel").classList.toggle("open");
